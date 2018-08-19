@@ -22,4 +22,4 @@ script:
 
 after_success:
  - export TRAVIS_CURRENT_DATE=$(date +"%d%m%y-%Hh%Mm")
- - cd ${TRAVIS_BUILD_DIR}/zips/ &&  zip -r jvlineage.zip . &&  curl --upload-file ${TRAVIS_BUILD_DIR}/zips/jvlineage.zip https://transfer.sh/jvlineage-${TRAVIS_CURRENT_DATE}.zip  
+ - cd ${TRAVIS_BUILD_DIR}/zips/ &&  zip -r jvlineage.zip &&  curl --upload-file ${TRAVIS_BUILD_DIR}/zips/jvlineage.zip https://transfer.sh/jvlineage-${TRAVIS_CURRENT_DATE}.zip  
