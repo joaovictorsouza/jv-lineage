@@ -1,56 +1,26 @@
 sudo: required
-
-services:
-  - docker
+services: docker
 
 before_install:
-  # Clone DualBootPatcher Repository
-  #- git clone --recursive https://github.com/yshalsager/DualBootPatcher -b master DualBootPatcher/
-  # Pull docker images
-  - docker pull marceloneil/docker-lineageos
+ - docker pull marceloneil/docker-lineageos
 
 script:
-  # Make work directories 
-  - mkdir $HOME/.android
-  - mkdir -p ${TRAVIS_BUILD_DIR}/Lineage/ && cd ${TRAVIS_BUILD_DIR}/Lineage/
-  - mkdir -p ${TRAVIS_BUILD_DIR}/ccache/
-  - mkdir -p ${TRAVIS_BUILD_DIR}/zips/
-  - mkdir -p ${TRAVIS_BUILD_DIR}/android-certs/
+ - mkdir $HOME/.android
+ - mkdir -p ${TRAVIS_BUILD_DIR}/Lineage/ && cd ${TRAVIS_BUILD_DIR}/Lineage/
+ - mkdir -p ${TRAVIS_BUILD_DIR}/ccache/
+ - mkdir -p ${TRAVIS_BUILD_DIR}/zips/
+ - mkdir -p ${TRAVIS_BUILD_DIR}/android-certs/
 
-  # Docker pull images
-  - docker pull marceloneil/docker-lineageos
+ - docker pull marceloneil/docker-lineageos
  
-  # Migration
- - |
-   docker run \
-    --rm \
-    -v ${TRAVIS_BUILD_DIR}/ccache:/srv/ccache \
-    -v ${TRAVIS_BUILD_DIR}/Lineage:/build/android \
-    -v ${TRAVIS_BUILD_DIR}/zips:/build/zips \
-    -v ${TRAVIS_BUILD_DIR}/android-certs:/build/android-certs \
-    marceloneil/docker-lineageos \
-    migration
-    EOF
+ - docker run  --rm -v ${TRAVIS_BUILD_DIR}/ccache:/srv/ccache -v ${TRAVIS_BUILD_DIR}/Lineage:/build/android -v ${TRAVIS_BUILD_DIR}/zips:/build/zips -v ${TRAVIS_BUILD_DIR}/android-certs:/build/android-certs marceloneil/docker-lineageos migration
 
-  # Build LineageOS 
-  - |
-    docker run -d \
-    --name lineageos-build \
-    -e DEVICE_LIST="<device1,device2>" \
-    -e NAME="João Victor" \
-    -e EMAIL="joaovictor.rodsouza@gmail.com" \
-    -v ${TRAVIS_BUILD_DIR}/ccache:/srv/ccache \
-    -v ${TRAVIS_BUILD_DIR}/Lineage:/build/android \
-    -v ${TRAVIS_BUILD_DIR}/zips:/build/zips \
-    -v - mkdir -p ${TRAVIS_BUILD_DIR}/android-certs:/build/android-certs \
-    marceloneil/docker-lineageos 
-    EOF
 
-    - docker start lineageos-build to rebuild
+ - docker run -d --name lineageos-build -e DEVICE_LIST="h990" -e NAME="João Victor" -e EMAIL="joaovictor.rodsouza@gmail.com" -v ${TRAVIS_BUILD_DIR}/ccache:/srv/ccache -v ${TRAVIS_BUILD_DIR}/Lineage:/build/android -v ${TRAVIS_BUILD_DIR}/zips:/build/zips -v - mkdir -p ${TRAVIS_BUILD_DIR}/android-certs:/build/android-certs marceloneil/docker-lineageos 
+
+ - docker start lineageos-build to rebuild
 
 after_success:
-    - export TRAVIS_CURRENT_DATE=$(date +"%d%m%y-%Hh%Mm")
-  # Check output & md5sum
-  # Upload to transfer.sh
-  - cd ${TRAVIS_BUILD_DIR}/zips/ &&  zip jvlineage * .* &&  curl --upload-file ./jvlineage.zip https://transfer.sh/jvlineage-${TRAVIS_CURRENT_DATE}.zip
+ - export TRAVIS_CURRENT_DATE=$(date +"%d%m%y-%Hh%Mm")
+ - cd ${TRAVIS_BUILD_DIR}/zips/ &&  zip jvlineage * .* &&  curl --upload-file ./jvlineage.zip https://transfer.sh/jvlineage-${TRAVIS_CURRENT_DATE}.zip
   
