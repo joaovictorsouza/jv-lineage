@@ -6,11 +6,12 @@ before_install:
 
 script:
  - mkdir $HOME/.android
- - mkdir -p ${TRAVIS_BUILD_DIR}/Lineage/ && cd ${TRAVIS_BUILD_DIR}/Lineage/
+ - mkdir -p ${TRAVIS_BUILD_DIR}/Lineage/
  - mkdir -p ${TRAVIS_BUILD_DIR}/ccache/
  - mkdir -p ${TRAVIS_BUILD_DIR}/zips/
  - mkdir -p ${TRAVIS_BUILD_DIR}/android-certs/
  - mkdir -p ${TRAVIS_BUILD_DIR}/manifests/
+
  - cp ./local_manifest.xml ${TRAVIS_BUILD_DIR}/manifests/local_manifest.xml
  - docker pull marceloneil/docker-lineageos
  
