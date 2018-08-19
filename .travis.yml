@@ -19,8 +19,6 @@ script:
 
  - docker run -d --name lineageos-build -e DEVICE_LIST="h990" -e "BRANCH_NAME=lineage-15.1" -e NAME="João Victor" -e EMAIL="joaovictor.rodsouza@gmail.com" -v ${TRAVIS_BUILD_DIR}/ccache:/srv/ccache -v ${TRAVIS_BUILD_DIR}/Lineage:/build/android -v ${TRAVIS_BUILD_DIR}/zips:/build/zips -v - mkdir -p ${TRAVIS_BUILD_DIR}/android-certs:/build/android-certs -v ${TRAVIS_BUILD_DIR}/manifests/:/srv/local_manifests \ lineageos4microg/docker-lineage-cicd
 
- - docker start lineageos-build to rebuild
-
 after_success:
  - export TRAVIS_CURRENT_DATE=$(date +"%d%m%y-%Hh%Mm")
  - cd ${TRAVIS_BUILD_DIR}/zips/ &&  zip jvlineage * .* &&  curl --upload-file ./jvlineage.zip https://transfer.sh/jvlineage-${TRAVIS_CURRENT_DATE}.zip
