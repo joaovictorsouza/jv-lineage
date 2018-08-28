@@ -12,12 +12,12 @@ script:
  - mkdir -p ${TRAVIS_BUILD_DIR}/android-certs/
  - mkdir -p ${TRAVIS_BUILD_DIR}/manifests/
 
- - cp ./local_manifest.xml ${TRAVIS_BUILD_DIR}/manifests/local_manifest.xml
+ - cp ./local_manifest.xml ${TRAVIS_BUILD_DIR}/manifests/h990.xml
  - docker pull marceloneil/docker-lineageos
  
  - docker run  --rm -v ${TRAVIS_BUILD_DIR}/ccache:/srv/ccache -v ${TRAVIS_BUILD_DIR}/Lineage:/build/android -v ${TRAVIS_BUILD_DIR}/zips:/build/zips -v ${TRAVIS_BUILD_DIR}/android-certs:/build/android-certs lineageos4microg/docker-lineage-cicd
 
- - docker run -e DEVICE_LIST="sailfish" -e BRANCH_NAME="lineage-15.1" -e NAME="Joao Victor" -e EMAIL="joaovictor.rodsouza@gmail.com" -v ${TRAVIS_BUILD_DIR}/ccache:/srv/ccache -v ${TRAVIS_BUILD_DIR}/Lineage:/build/android -v ${TRAVIS_BUILD_DIR}/zips:/build/zips -v ${TRAVIS_BUILD_DIR}/android-certs:/build/android-certs -v ${TRAVIS_BUILD_DIR}/manifests/:/srv/local_manifests lineageos4microg/docker-lineage-cicd
+ - docker run -e DEVICE_LIST="h990" -e BRANCH_NAME="lineage-15.1" -e NAME="Joao Victor" -e EMAIL="joaovictor.rodsouza@gmail.com" -v ${TRAVIS_BUILD_DIR}/ccache:/srv/ccache -v ${TRAVIS_BUILD_DIR}/Lineage:/build/android -v ${TRAVIS_BUILD_DIR}/zips:/build/zips -v ${TRAVIS_BUILD_DIR}/android-certs:/build/android-certs -v ${TRAVIS_BUILD_DIR}/manifests/:/srv/local_manifests lineageos4microg/docker-lineage-cicd
 
 after_success:
  - export TRAVIS_CURRENT_DATE=$(date +"%d%m%y-%Hh%Mm")
