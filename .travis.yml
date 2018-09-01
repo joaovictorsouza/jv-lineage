@@ -2,7 +2,7 @@ sudo: required
 services: docker
 
 before_install:
- - docker pull lineageos4microg/docker-lineage-cicd
+ - docker pull jfloff/lineageos
 
 script:
  - mkdir $HOME/.android
