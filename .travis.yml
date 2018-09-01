@@ -8,4 +8,4 @@ script:
  - mkdir $HOME/.android
  - mkdir -p ${TRAVIS_BUILD_DIR}/Lineage/
  
- docker run --rm --privileged -v "${TRAVIS_BUILD_DIR}/Lineage/":/home/lineageos --env-file h990.env -ti jfloff/lineageos lineageos init build
+ - docker run --rm --privileged -v "${TRAVIS_BUILD_DIR}/Lineage/":/home/lineageos --env-file h990.env -ti jfloff/lineageos lineageos init build
