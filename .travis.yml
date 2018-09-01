@@ -5,7 +5,7 @@ before_install:
  - docker pull jfloff/lineageos
 
 script:
- - mkdir $HOME/.android
- - mkdir -p ${TRAVIS_BUILD_DIR}/Lineage/
+ - sudo mkdir $HOME/.android
+ - sudo mkdir -p ${TRAVIS_BUILD_DIR}/Lineage/
  
- - docker run --rm --privileged -v "${TRAVIS_BUILD_DIR}/Lineage/":/home/lineageos --env-file h990.env -ti jfloff/lineageos lineageos init build
+ - sudo docker run --rm --privileged -v "${TRAVIS_BUILD_DIR}/Lineage/":/home/lineageos --env-file h990.env -ti jfloff/lineageos lineageos init build
